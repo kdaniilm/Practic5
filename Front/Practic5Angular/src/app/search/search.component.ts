@@ -49,7 +49,6 @@ export class SearchComponent implements OnInit {
   }
 
   public getFirst(){
-
     this.getFunc();
   }
 }
