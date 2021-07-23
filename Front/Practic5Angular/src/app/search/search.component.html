@@ -1,0 +1,9 @@
+<div>
+    <form>
+        <input (keyup)="getAppModels($event)" list="appsList">
+        <p>{{searchString}}</p>
+        <div *ngIf="appModels" id="appsList">
+          <p *ngFor="let app of appModels">{{app.appName}}</p>
+        </div>
+    </form>
+</div>

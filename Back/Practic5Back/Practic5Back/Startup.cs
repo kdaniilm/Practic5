@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Practic5Back.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,21 @@ namespace Practic5Back
         }
 
         public IConfiguration Configuration { get; }
+        private CorsData CorsData = new CorsData();
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Configuration.Bind("CorsData", CorsData);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: CorsData.CorsName,
+                    builder => {
+                        builder.WithOrigins(CorsData.AllowHost);
+                    });
+            });
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -47,6 +59,8 @@ namespace Practic5Back
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(CorsData.CorsName);
 
             app.UseAuthorization();
 
