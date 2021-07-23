@@ -25,11 +25,17 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  private getFunc(){
+  private getFunc(isFirst: boolean){
     this.headers.append('Content-Type', 'application/json');
     this.params.set("searchString", this.searchString);
     this.http.get<Array<AppModel>>(environment.serverPath + "/search", {headers: this.headers, params: {searchString: this.searchString}}).subscribe((res) => {
+
+      if(isFirst === false){
       this.appModels = res;
+      }
+      else{
+        this.appModels = res.slice(0, res.length / 2);
+      }
     },
     error => {
       console.log(error);
@@ -45,10 +51,10 @@ export class SearchComponent implements OnInit {
     else if(event.key != "Control" && event.key != "Shift" && event.key != "Tab" && event.key != "Enter"){
       this.searchString += event.key;
     }
-    this.getFunc();
+    this.getFunc(false);
   }
 
   public getFirst(){
-    this.getFunc();
+    this.getFunc(true);
   }
 }
