@@ -44,17 +44,6 @@ namespace Practic5Back.Controllers
             var returnApps = new List<AppModel>();
             if (!string.IsNullOrEmpty(searchString))
             {
-                //foreach (var app in appModels)
-                //{
-                //    if (app.AppName.Length >= searchString.Length)
-                //    {
-                //        if (app.AppName.Substring(0, searchString.Length).ToLower() == searchString.ToLower())
-                //        {
-                //            returnApps.Add(app);
-                //        }
-                //    }
-                //}
-
                 returnApps = appModels.Where(x => x.AppName.Substring(0, searchString.Length).ToLower() == searchString.ToLower()).ToList();
             }
             else
