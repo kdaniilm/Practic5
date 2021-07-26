@@ -1,9 +1,6 @@
 <div>
     <form>
         <input (keyup)="getAppModels($event)" list="appsList">
-        <!-- <div *ngIf="appModels" id="appsList">
-          <p *ngFor="let app of appModels">{{app.appName}}</p>
-        </div> -->
         <select *ngIf="appModels" id="appsList">
           <option *ngFor="let app of appModels" value={{app.appName}}>{{app.appName}}</option>
         </select>
