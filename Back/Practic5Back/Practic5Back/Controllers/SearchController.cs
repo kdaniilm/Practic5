@@ -41,8 +41,6 @@ namespace Practic5Back.Controllers
         [EnableCors("SearchCors")]
         public JsonResult SendSearchData(string searchString)
         {
-            //if (!string.IsNullOrEmpty(searchString)) { return new JsonResult(appModels.Where(x => x.AppName.Substring(0, searchString.Length).ToLower() == searchString.ToLower()).ToList()); }
-            //else { return new JsonResult(appModels); }
             return !string.IsNullOrEmpty(searchString) ? new JsonResult(appModels.Where(x => x.AppName.Substring(0, searchString.Length).ToLower() == searchString.ToLower()).ToList()) : new JsonResult(appModels);
         }
     }
