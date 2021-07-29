@@ -28,6 +28,7 @@ export class SearchComponent implements OnInit {
   private getFunc(isFirst: boolean){
     this.headers.append('Content-Type', 'application/json');
     this.params.set("searchString", this.searchString);
+    if(this.searchString.length >= 3){
     this.http.get<Array<AppModel>>(environment.serverPath + "/search", {headers: this.headers, params: {searchString: this.searchString}}).subscribe((res) => {
 
       if(isFirst === false){
@@ -41,6 +42,7 @@ export class SearchComponent implements OnInit {
       console.log(error);
     });
   }
+  }
 
   public getAppModels(event: KeyboardEvent){
     
@@ -51,7 +53,8 @@ export class SearchComponent implements OnInit {
     else if(event.key != "Control" && event.key != "Shift" && event.key != "Tab" && event.key != "Enter"){
       this.searchString += event.key;
     }
-    this.getFunc(false);
+    setTimeout(() => this.getFunc(false), 3000);
+    
   }
 
   public getFirst(){

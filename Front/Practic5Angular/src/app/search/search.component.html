@@ -1,8 +1,8 @@
 <div>
     <form>
         <input (keyup)="getAppModels($event)" list="appsList">
-        <select *ngIf="appModels" id="appsList">
+        <datalist id="appsList">
           <option *ngFor="let app of appModels" value={{app.appName}}>{{app.appName}}</option>
-        </select>
+        </datalist>
     </form>
 </div>
